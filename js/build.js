@@ -18,7 +18,7 @@ Fliplet.Widget.instance({
         } else if (!dataSourceEntryId) {
           return Fliplet.UI.Toast('Missing dataSourceEntryId as a query parameter');
         } else if (!dataSourceId) {
-          return Fliplet.UI.Toast('Please select Data Source from the Flie list component configuration');
+          return Fliplet.UI.Toast('Please select Data Source from the File list component configuration');
         } else if (!columnName) {
           return Fliplet.UI.Toast('Please select Column Name from File list component configuration');
         }
