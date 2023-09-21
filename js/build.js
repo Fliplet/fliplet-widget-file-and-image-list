@@ -1,3 +1,6 @@
+/* eslint-disable new-cap */
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
 Fliplet.Widget.instance({
   name: 'file-list',
   displayName: 'File list',
@@ -5,12 +8,15 @@ Fliplet.Widget.instance({
   render: {
     dependencies: [],
     template: [
-      '<div data-view="content"></div>',
+      '<div data-view="content"></div>'
     ].join(''),
-    ready: async function () {
+    ready: async function() {
       let thisy = this;
-      const populateFileList = (dataSourceEntryId = Fliplet.Navigate.query.dataSourceEntryId, dataSourceId = thisy.fields.dataSource) => {
-        let columnName = thisy.fields.columnName; // TODO missing columName for list repeator
+      const populateFileList = (
+        dataSourceEntryId = Fliplet.Navigate.query.dataSourceEntryId,
+        dataSourceId = thisy.fields.dataSource) => {
+        // TODO missing columName for list repeater
+        let columnName = thisy.fields.columnName;
         let type = thisy.fields.type;
 
         if (!navigator.onLine) {
@@ -24,16 +30,20 @@ Fliplet.Widget.instance({
         }
 
         // TODO remove connect and findById
-        // pass record as parameter in the function when you have that informaion in the list repeator
+        // pass record as parameter in the function when you have that information in the list repeater
         // we have it for now only in record container
-        return Fliplet.DataSources.connect(dataSourceId).then(function (connection) {
-          return connection.findById(dataSourceEntryId);
-        }).then(function (record) {
-          if (!checkArrayLinks(record.data[columnName])) {
-            $(document).find('[data-helper="file-list"]').html(`<p>There are no ${type}s</p>`);
-            return
-          } else {
-            let fileIDs = record.data[columnName].map(function (file) {
+        return Fliplet.DataSources.connect(dataSourceId)
+          .then(function(connection) {
+            return connection.findById(dataSourceEntryId);
+          }).then(function(record) {
+            if (!checkArrayLinks(record.data[columnName])) {
+              $(document).find('[data-helper="file-list"]')
+                .html(`<p>There are no ${type}s</p>`);
+
+              return;
+            }
+
+            let fileIDs = record.data[columnName].map(function(file) {
               let url = typeof file === 'string'
                 ? file
                 : file.url;
@@ -45,8 +55,8 @@ Fliplet.Widget.instance({
             return Fliplet.Media.Files.getAll({
               files: fileIDs,
               fields: ['name', 'url', 'metadata', 'createdAt']
-            }).then(function (files) {
-              let filesInfo = files.map(function (file) {
+            }).then(function(files) {
+              let filesInfo = files.map(function(file) {
                 const extension = file.name.split('.').pop().toLowerCase();
                 let type = '';
 
@@ -76,13 +86,14 @@ Fliplet.Widget.instance({
                   url: file.url
                 };
               }).sort(sortFilesByName);
-              if (type == 'Image') {
+
+              if (type === 'Image') {
                 let data = {
                   images: filesInfo.map(el => {
                     return {
-                      // title: el.name,
+                    // title: el.name,
                       url: Fliplet.Media.authenticate(el.url)
-                    }
+                    };
                   }),
                   options: {
                     index: 0,
@@ -90,53 +101,64 @@ Fliplet.Widget.instance({
                   }
                 };
                 let images = data.images.map((el, index) => {
-                  return `<div class="image-item-container" data-index="${index}">
+                  return `<div class="image-item-container" 
+                            data-index="${index}">
                             <img src="${el.url}" />
-                          </div>`
-                })
+                          </div>`;
+                });
+
                 $(document).find('[data-helper="file-list"]').append(`
                   <div class="image-container">
                     ${images.join('')}
                   <div>
                 `);
 
-                $(document).find('.image-item-container').off('click').on('click', function () {
-                  data.options.index = Number($(this).attr('data-index'));
-                  Fliplet.Navigate.previewImages(data);
-                })
+                $(document).find('.image-item-container')
+                  .off('click')
+                  .on('click', function() {
+                    data.options.index = Number($(this).attr('data-index'));
+                    Fliplet.Navigate.previewImages(data);
+                  });
               } else {
                 let str = '';
-                fileItems = [];
+
+                var fileItems = [];
+
                 filesInfo.forEach(el => {
                   fileItems.push(`<div class="file-container-item" data-link="${encodeURIComponent(el.url)}">
                   <div>
                     <p>${el.name}</p>
                     <p>Uploaded: ${moment(el.uploaded).format('MMM D, YYYY')} - ${convertBytesToLargerUnits(el.size)}</p>
                   </div>
-                  <div><i class="fa fa-2x fa-angle-right" aria-hidden="true"></i></div>
-                  </div>`)
-                })
+                  <div>
+                    <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                  </div>
+                  </div>`);
+                });
 
-                str += `<div class="file-container">${fileItems.join('')}</div>`
+                str += `<div class="file-container">${fileItems.join('')}</div>`;
                 $(document).find('[data-helper="file-list"]').append(str);
 
-                $(document).find('.file-container-item').off('click').on('click', function () {
-                  let link = decodeURIComponent($(this).attr('data-link'));
-                  window.open(Fliplet.Media.authenticate(link), '_blank');
-                })
+                $(document).find('.file-container-item')
+                  .off('click')
+                  .on('click', function() {
+                    let link = decodeURIComponent($(this).attr('data-link'));
+
+                    window.open(Fliplet.Media.authenticate(link), '_blank');
+                  });
               }
-            })
-          }
-        }).catch(e => {
-          return Fliplet.parseError(e);
+            });
+          }).catch(e => {
+            return Fliplet.parseError(e);
           // return Fliplet.UI.Toast(e.responseJSON.error);
-        })
-      }
+          });
+      };
 
       function checkArrayLinks(array) {
         if (array && Array.isArray(array)) {
           return true;
         }
+
         return false;
       }
 
@@ -168,12 +190,14 @@ Fliplet.Widget.instance({
       }
 
       if (Fliplet.RecordContainer) {
-        Fliplet.Hooks.on('recordContainerDataRetrieved', function (options) {
+        Fliplet.Hooks.on('recordContainerDataRetrieved', function(options) {
           return populateFileList(options.entry.id, options.entry.dataSourceId, options.entry);
         });
       } else {
-        // TODO missing entry information and columName for list repeator
-        return populateFileList($(thisy.el).closest('fl-list-repeater-row').attr('data-row-id'), thisy.fields.dataSource, thisy.data.row)
+        // TODO missing entry information and columName for list repeater
+        return populateFileList($(thisy.el)
+          .closest('fl-list-repeater-row')
+          .attr('data-row-id'), thisy.fields.dataSource, thisy.data.row);
       }
     },
     views: [
