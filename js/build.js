@@ -11,13 +11,13 @@ Fliplet.Widget.instance({
       '<div data-view="content"></div>'
     ].join(''),
     ready: async function() {
-      let thisy = this;
+      let thisFileList = this;
       const populateFileList = (
         dataSourceEntryId = Fliplet.Navigate.query.dataSourceEntryId,
-        dataSourceId = thisy.fields.dataSource) => {
+        dataSourceId = thisFileList.fields.dataSource) => {
         // TODO missing columName for list repeater
-        let columnName = thisy.fields.columnName;
-        let type = thisy.fields.type;
+        let columnName = thisFileList.fields.columnName;
+        let type = thisFileList.fields.type;
 
         if (!navigator.onLine) {
           return Fliplet.UI.Toast('Please connect device to the internet');
@@ -36,7 +36,7 @@ Fliplet.Widget.instance({
           .then(function(connection) {
             return connection.findById(dataSourceEntryId);
           }).then(function(record) {
-            if (!checkArrayLinks(record.data[columnName])) {
+            if (!isArray(record.data[columnName])) {
               $(document).find('[data-helper="file-list"]')
                 .html(`<p>There are no ${type}s</p>`);
 
@@ -51,7 +51,7 @@ Fliplet.Widget.instance({
               return Fliplet.Media.getIdFromRemoteUrl(url);
             });
 
-            // TODO check how to escape this call
+            // TODO check how to escape this call - product will provide solution
             return Fliplet.Media.Files.getAll({
               files: fileIDs,
               fields: ['name', 'url', 'metadata', 'createdAt']
@@ -121,8 +121,7 @@ Fliplet.Widget.instance({
                   });
               } else {
                 let str = '';
-
-                var fileItems = [];
+                let fileItems = [];
 
                 filesInfo.forEach(el => {
                   fileItems.push(`<div class="file-container-item" data-link="${encodeURIComponent(el.url)}">
@@ -154,12 +153,8 @@ Fliplet.Widget.instance({
           });
       };
 
-      function checkArrayLinks(array) {
-        if (array && Array.isArray(array)) {
-          return true;
-        }
-
-        return false;
+      function isArray(array) {
+        return array && Array.isArray(array);
       }
 
       function sortFilesByName(a, b) {
@@ -195,9 +190,9 @@ Fliplet.Widget.instance({
         });
       } else {
         // TODO missing entry information and columName for list repeater
-        return populateFileList($(thisy.el)
+        return populateFileList($(thisFileList.el)
           .closest('fl-list-repeater-row')
-          .attr('data-row-id'), thisy.fields.dataSource, thisy.data.row);
+          .attr('data-row-id'), thisFileList.fields.dataSource, thisFileList.data.row);
       }
     },
     views: [
