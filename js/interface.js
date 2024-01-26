@@ -15,7 +15,7 @@ Fliplet.Widget.generateInterface({
       type: 'provider',
       label: 'Datasource',
       package: 'com.fliplet.data-source-provider',
-      change: function(value) {
+      onEvent: function(value) {
         Fliplet.Helper.field('columnName').toggle(value);
 
         if (value) {
