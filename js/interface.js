@@ -15,7 +15,8 @@ Fliplet.Widget.generateInterface({
       type: 'provider',
       label: 'Datasource',
       package: 'com.fliplet.data-source-provider',
-      onEvent: function(value) {
+      onEvent: function(eventName, data) {
+        debugger
         Fliplet.Helper.field('columnName').toggle(value);
 
         if (value) {
@@ -29,7 +30,8 @@ Fliplet.Widget.generateInterface({
           });
         }
       },
-      ready: function() {
+      ready: function(el, value, provider) {{
+        debugger
         var value = Fliplet.Helper.field('dataSource').get();
 
         if (value) {
