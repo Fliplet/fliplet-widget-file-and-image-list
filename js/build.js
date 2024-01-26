@@ -14,7 +14,7 @@ Fliplet.Widget.instance({
       let thisFileList = this;
       const populateFileList = (
         dataSourceEntryId = Fliplet.Navigate.query.dataSourceEntryId,
-        dataSourceId = thisFileList.fields.dataSource) => {
+        dataSourceId = thisFileList.fields.dataSource.id) => {
         // TODO missing columName for list repeater
         let columnName = thisFileList.fields.columnName;
         let type = thisFileList.fields.type;
