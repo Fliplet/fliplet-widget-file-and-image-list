@@ -37,7 +37,7 @@ Fliplet.Widget.generateInterface({
         // var valuex = Fliplet.Helper.field('dataSource').get();
 
         if (value) {
-          Fliplet.DataSources.getById(value, {
+          Fliplet.DataSources.getById(value.id, {
             attributes: ['columns']
           }).then(function(columns) {
             $('#columnName').html('');
