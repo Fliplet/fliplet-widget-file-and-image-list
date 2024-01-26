@@ -15,23 +15,23 @@ Fliplet.Widget.generateInterface({
       type: 'provider',
       label: 'Datasource',
       package: 'com.fliplet.data-source-provider',
-      onEvent: function(eventName, data) {
-        debugger;
-        var value = 'x';
+      // onEvent: function(eventName, data) {
+      //   debugger;
+      //   var value = 'x';
 
-        Fliplet.Helper.field('columnName').toggle(value);
+      //   Fliplet.Helper.field('columnName').toggle(value);
 
-        if (value) {
-          Fliplet.DataSources.getById(value, {
-            attributes: ['columns']
-          }).then(function(columns) {
-            $('#columnName').html('');
-            columns.columns.forEach((el) => {
-              $('#columnName').append(`<option value="${el}">${el}</option>`);
-            });
-          });
-        }
-      },
+      //   if (value) {
+      //     Fliplet.DataSources.getById(value, {
+      //       attributes: ['columns']
+      //     }).then(function(columns) {
+      //       $('#columnName').html('');
+      //       columns.columns.forEach((el) => {
+      //         $('#columnName').append(`<option value="${el}">${el}</option>`);
+      //       });
+      //     });
+      //   }
+      // },
       ready: function(el, value, provider) {
         debugger;
         // var valuex = Fliplet.Helper.field('dataSource').get();
