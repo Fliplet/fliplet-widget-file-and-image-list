@@ -15,7 +15,7 @@ Fliplet.Widget.generateInterface({
       type: 'provider',
       label: 'Datasource',
       package: 'com.fliplet.data-source-provider',
-      onEvent: function change(event, data) {
+      onEvent: function(event, data) {
         debugger;
         // var value = 'x';
 
