@@ -7,10 +7,17 @@
     "browser": true,
     "jquery": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
   "globals": {
     "_": true,
     "Fliplet": true,
-    "widgetInstance": true
-  },
-  "rules": {}
+    "interfaceBrowser": true,
+    "buildBrowser": true,
+    "interfaceUrl": true,
+    "buildUrl": true,
+    "widgetInstance": true,
+    "buildSelector": true
+  }
 }
