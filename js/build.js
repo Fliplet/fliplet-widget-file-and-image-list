@@ -1,6 +1,4 @@
-/* eslint-disable new-cap */
-/* eslint-disable no-param-reassign */
-/* eslint-disable max-len */
+// TODO missing icon
 Fliplet.Widget.instance({
   name: 'file-list',
   displayName: 'File list',
@@ -13,7 +11,7 @@ Fliplet.Widget.instance({
       const entry = fileList?.parent?.entry || {};
       const fileListInstanceId = fileList.id;
 
-      Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
+      return Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
         let dynamicContainer = null;
         let recordContainer = null;
         let listRepeater = null;
