@@ -1,52 +1,34 @@
-Fliplet.Widget.generateInterface({
-  title: 'File list',
-  fields: [
-    {
-      name: 'dataSource',
-      type: 'provider',
-      label: 'Datasource',
-      package: 'com.fliplet.data-source-provider',
-      onEvent: function(event, data) {
-        if (event === 'dataSourceSelect') {
-          Fliplet.Helper.field('columnName').toggle(data.name);
+Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then(function(widgets) {
+  const dynamicContainer = widgets[0];
 
-          $('#columnName').html('');
-          data.columns.forEach((el) => {
-            $('#columnName').append(`<option value="${el}">${el}</option>`);
-          });
+  return Fliplet.DataSources.getById(dynamicContainer && dynamicContainer.dataSourceId, {
+    attributes: ['columns']
+  }).then((dataSource) => {
+    return _.orderBy(dataSource.columns, column => column.toLowerCase());
+  }, () => {
+    return [];
+  }).then((dataSourceColumns = []) => {
+    return Fliplet.Widget.generateInterface({
+      title: 'File list',
+      fields: [
+        {
+          name: 'columnName',
+          type: 'dropdown',
+          label: 'Pick file column',
+          options: dataSourceColumns,
+          default: '',
+          ready: function() {
+
+          }
+        },
+        {
+          name: 'type',
+          type: 'dropdown',
+          label: 'Type',
+          options: ['Image', 'File'],
+          default: 'Image'
         }
-      },
-      ready: function(el, value) {
-        if (value) {
-          Fliplet.DataSources.getById(value.id, {
-            attributes: ['columns']
-          }).then(function(columns) {
-            $('#columnName').html('');
-            columns.columns.forEach((el) => {
-              $('#columnName').append(`<option value="${el}">${el}</option>`);
-            });
-          });
-        }
-      }
-    },
-    {
-      name: 'columnName',
-      type: 'dropdown',
-      label: 'Pick file column',
-      options: [],
-      default: '',
-      ready: function() {
-        Fliplet.Helper.field('columnName').toggle(
-          Fliplet.Helper.field('dataSource').get()
-        );
-      }
-    },
-    {
-      name: 'type',
-      type: 'dropdown',
-      label: 'Type',
-      options: ['Image', 'File'],
-      default: 'Image'
-    }
-  ]
+      ]
+    });
+  });
 });
