@@ -1,6 +1,6 @@
 {
-  "name": "File list",
-  "package": "com.fliplet.file-list",
+  "name": "File and Image list",
+  "package": "com.fliplet.file-image-list",
   "version": "1.0.0",
   "icon": "img/icon.png",
   "tags": ["type:component", "category:general", "beta:true"],

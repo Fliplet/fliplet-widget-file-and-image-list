@@ -1,7 +1,7 @@
 // TODO missing icon
 Fliplet.Widget.instance({
-  name: 'file-list',
-  displayName: 'File list',
+  name: 'file-image-list',
+  displayName: 'File and image list',
   icon: 'fa-exchange',
   render: {
     dependencies: [],
@@ -59,7 +59,7 @@ Fliplet.Widget.instance({
 
           if (!isArray(entry.data[columnName])) {
             $(document)
-              .find('[data-helper="file-list"]')
+              .find('[data-helper="file-image-list"]')
               .html(`<p>There are no ${type}s</p>`);
 
             return;
@@ -132,7 +132,7 @@ Fliplet.Widget.instance({
                             </div>`;
               });
 
-              $(document).find('[data-helper="file-list"]').append(`
+              $(document).find('[data-helper="file-image-list"]').append(`
                     <div class="image-container">
                       ${images.join('')}
                     <div>
@@ -168,7 +168,7 @@ Fliplet.Widget.instance({
               str += `<div class="file-container">${fileItems.join(
                 ''
               )}</div>`;
-              $(document).find('[data-helper="file-list"]').append(str);
+              $(document).find('[data-helper="file-image-list"]').append(str);
 
               $(document)
                 .find('.file-container-item')

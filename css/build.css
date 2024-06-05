@@ -1,8 +1,8 @@
-fl-helper[name="file-list"] .file-container {
+fl-helper[name="file-image-list"] .file-container {
   background: #fff;
 }
 
-fl-helper[name="file-list"] .file-container-item {
+fl-helper[name="file-image-list"] .file-container-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,48 +11,48 @@ fl-helper[name="file-list"] .file-container-item {
   cursor: pointer;
 }
 
-fl-helper[name="file-list"] .file-container-item .fa-angle-right {
+fl-helper[name="file-image-list"] .file-container-item .fa-angle-right {
   color: #ababab;
 }
 
-fl-helper[name="file-list"] .file-container-item>div:nth-child(1) {
+fl-helper[name="file-image-list"] .file-container-item>div:nth-child(1) {
   flex: 0 0 calc(100% - 40px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-fl-helper[name="file-list"] .file-container-item>div:nth-child(1)>p {
+fl-helper[name="file-image-list"] .file-container-item>div:nth-child(1)>p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-fl-helper[name="file-list"] .file-container-item>div:nth-child(1)>p:nth-child(1) {
+fl-helper[name="file-image-list"] .file-container-item>div:nth-child(1)>p:nth-child(1) {
   font-weight: bold;
   color: #ababab;
   font-size: 18px;
   margin-bottom: 0;
 }
 
-fl-helper[name="file-list"] .file-container-item>div:nth-child(1)>p:nth-child(2) {
+fl-helper[name="file-image-list"] .file-container-item>div:nth-child(1)>p:nth-child(2) {
   color: #ababab;
   margin-bottom: 0;
 }
 
-fl-helper[name="file-list"] .file-container-item>div:nth-child(2) {
+fl-helper[name="file-image-list"] .file-container-item>div:nth-child(2) {
   display: flex;
   flex: 0 0 40px;
   justify-content: center;
 }
 
-fl-helper[name="file-list"] .image-container {
+fl-helper[name="file-image-list"] .image-container {
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
   flex-wrap: wrap;
 }
 
-fl-helper[name="file-list"] .image-item-container {
+fl-helper[name="file-image-list"] .image-item-container {
   flex: 0 0 50%;
 }
