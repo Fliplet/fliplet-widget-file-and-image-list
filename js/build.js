@@ -10,6 +10,7 @@ Fliplet.Widget.instance({
       let fileList = this;
       const entry = fileList?.parent?.entry || {};
       const fileListInstanceId = fileList.id;
+      const modeInteract = Fliplet.Env.get('interact');
 
       return Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
         let dynamicContainer = null;
@@ -31,6 +32,10 @@ Fliplet.Widget.instance({
             || !dynamicContainer.dataSourceId
             || (!recordContainer && !listRepeater)
         ) {
+          return;
+        }
+
+        if (modeInteract) {
           return;
         }
 
