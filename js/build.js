@@ -35,10 +35,6 @@ Fliplet.Widget.instance({
           return;
         }
 
-        if (modeInteract) {
-          return;
-        }
-
         const dataSourceId = dynamicContainer.dataSourceId;
         const dataSourceEntryId = entry.id;
 
@@ -48,11 +44,11 @@ Fliplet.Widget.instance({
 
           if (!navigator.onLine) {
             return Fliplet.UI.Toast('Please connect device to the internet');
-          } else if (!dataSourceEntryId) {
+          } else if (!dataSourceEntryId && !modeInteract) {
             return Fliplet.UI.Toast(
               'Missing dataSourceEntryId as a query parameter'
             );
-          } else if (!dataSourceId) {
+          } else if (!dataSourceId && !modeInteract) {
             return Fliplet.UI.Toast(
               'Please select Data Source from the File list component configuration'
             );
