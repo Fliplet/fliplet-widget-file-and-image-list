@@ -1,7 +1,7 @@
 // TODO missing icon
 Fliplet.Widget.instance({
   name: 'file-image-list',
-  displayName: 'File and image list',
+  displayName: 'File or image list',
   icon: 'fa-exchange',
   render: {
     dependencies: [],
