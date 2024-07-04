@@ -6,13 +6,27 @@ Fliplet.Widget.instance({
   render: {
     dependencies: [],
     template: [
-      '<div data-view="content"></div>'
+      '<div data-view="content" class="configured">configured</div>',
+      '<div data-view="not-configured" class="not-configured">not-configured</div>',
+      '<div data-view="configured-interact" class="configured-interact">configured-interact</div>'
     ].join(''),
     ready: async function() {
       let fileList = this;
       const entry = fileList?.parent?.entry || {};
       const fileListInstanceId = fileList.id;
       const modeInteract = Fliplet.Env.get('interact');
+
+      function showContent(mode) {
+        $('.configured').toggle(mode === 'configured');
+        $('.not-configured').toggle(mode === 'not-configured');
+        $('.configured-interact').toggle(mode === 'configured-interact');
+      }
+
+      if (modeInteract) {
+        showContent('configured-interact');
+
+        return;
+      }
 
       return Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
         let dynamicContainer = null;
