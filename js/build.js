@@ -22,12 +22,6 @@ Fliplet.Widget.instance({
         $('.configured-interact').toggle(mode === 'configured-interact');
       }
 
-      if (modeInteract) {
-        showContent('configured-interact');
-
-        return;
-      }
-
       return Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
         let dynamicContainer = null;
         let recordContainer = null;
@@ -48,8 +42,18 @@ Fliplet.Widget.instance({
             || !dynamicContainer.dataSourceId
             || (!recordContainer && !listRepeater)
         ) {
+          showContent('not-configured');
+
           return;
         }
+
+        if (modeInteract) {
+          showContent('configured-interact');
+
+          return;
+        }
+
+        showContent('configured');
 
         const dataSourceId = dynamicContainer.dataSourceId;
         const dataSourceEntryId = entry.id;
