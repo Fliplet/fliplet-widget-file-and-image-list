@@ -84,8 +84,6 @@ Fliplet.Widget.instance({
           return;
         }
 
-        showContent('configured');
-
         const dataSourceId = dynamicContainer.dataSourceId;
         const dataSourceEntryId = entry.id;
 
@@ -104,8 +102,16 @@ Fliplet.Widget.instance({
               'Please select Data Source from the File list component configuration'
             );
           } else if (!columnName) {
+            showContent('not-configured');
+
             return Fliplet.UI.Toast(
               'Please select Column Name from File list component configuration'
+            );
+          } else if (!type) {
+            showContent('not-configured');
+
+            return Fliplet.UI.Toast(
+              'Please select Type from File list component configuration'
             );
           }
 
@@ -116,6 +122,8 @@ Fliplet.Widget.instance({
 
             return;
           }
+
+          showContent('configured');
 
           let fileIDs = entry.data[columnName].map(function(file) {
             let url = typeof file === 'string' ? file : file.url;
