@@ -6,8 +6,7 @@ Fliplet.Widget.instance({
   render: {
     dependencies: [],
     template: [
-      '<div data-view="content"></div>',
-      '<div data-view="configured"></div>'
+      '<div data-view="content"></div>'
     ].join(''),
     ready: async function() {
       let fileList = this;
@@ -230,12 +229,7 @@ Fliplet.Widget.instance({
       {
         name: 'content',
         displayName: 'File list content',
-        placeholder: '<p>Configure File list component</p>'
-      },
-      {
-        name: 'configured',
-        displayName: 'File list content',
-        placeholder: '<p>Configured</p>'
+        placeholder: '<p>Configure File & Image list component</p>'
       }
     ]
   }

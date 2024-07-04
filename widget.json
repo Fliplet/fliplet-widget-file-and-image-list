@@ -7,7 +7,6 @@
   "provider_only": false,
   "references": [
     "content:richContent",
-    "configured:richContent",
     "dataSource:dataSource"
   ],
   "settings": {
