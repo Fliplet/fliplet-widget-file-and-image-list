@@ -78,12 +78,6 @@ Fliplet.Widget.instance({
           return;
         }
 
-        if (modeInteract) {
-          showContent('configured-interact');
-
-          return;
-        }
-
         const dataSourceId = dynamicContainer.dataSourceId;
         const dataSourceEntryId = entry.id;
 
@@ -113,6 +107,10 @@ Fliplet.Widget.instance({
             return Fliplet.UI.Toast(
               'Please select Type from File list component configuration'
             );
+          } else if (modeInteract) {
+            showContent('configured-interact');
+
+            return;
           }
 
           if (!isArray(entry.data[columnName])) {
