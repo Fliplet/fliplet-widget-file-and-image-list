@@ -5,7 +5,10 @@ Fliplet.Widget.instance({
   icon: 'fa-exchange',
   render: {
     dependencies: [],
-    template: ['<div data-view="content"></div>'].join(''),
+    template: [
+      '<div data-view="content"></div>',
+      '<div data-view="configured"></div>'
+    ].join(''),
     ready: async function() {
       let fileList = this;
       const entry = fileList?.parent?.entry || {};
@@ -228,6 +231,11 @@ Fliplet.Widget.instance({
         name: 'content',
         displayName: 'File list content',
         placeholder: '<p>Configure File list component</p>'
+      },
+      {
+        name: 'configured',
+        displayName: 'File list content',
+        placeholder: '<p>Configured</p>'
       }
     ]
   }
