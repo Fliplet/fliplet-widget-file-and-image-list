@@ -26,6 +26,7 @@ Fliplet.Widget.instance({
         switch (mode) {
           case 'configured-interact':
             $('.configured-interact').html(`<div class="file-container">
+              <p class="style-title">ATTACHMENTS</p>
               <div class="file-container-item">
                 <div>
                   <p>Title</p>
@@ -120,6 +121,11 @@ Fliplet.Widget.instance({
 
             return;
           }
+
+          $(document)
+            .find('[data-helper="file-image-list"]')
+            .html('<p class="style-title">ATTACHMENTS</p>');
+
 
           showContent('configured');
 
