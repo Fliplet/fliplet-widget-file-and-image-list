@@ -2,6 +2,11 @@ fl-helper[name="file-image-list"] .file-container {
   background: #fff;
 }
 
+fl-helper[name="file-image-list"] .style-title {
+  border-bottom: 1px solid #6A6868;
+  padding-bottom: 10px;
+}
+
 fl-helper[name="file-image-list"] .file-container-item {
   display: flex;
   justify-content: space-between;

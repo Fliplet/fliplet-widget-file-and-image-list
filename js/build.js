@@ -6,9 +6,31 @@ Fliplet.Widget.instance({
   render: {
     dependencies: [],
     template: [
-      '<div data-view="content" class="configured">configured</div>',
-      '<div data-view="not-configured" class="not-configured">not-configured</div>',
-      '<div data-view="configured-interact" class="configured-interact">configured-interact</div>'
+      '<div data-view="content" class="configured"></div>',
+      '<div data-view="not-configured" class="not-configured"></div>',
+      `<div data-view="configured-interact" class="configured-interact">
+      <div class="file-container">
+        <div class="file-container-item">
+          <div>
+            <p>Title</p>
+            <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
+          </div>
+          <div>
+            <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+          </div>
+          </div>
+        </div>
+        <div class="file-container-item">
+          <div>
+            <p>Title</p>
+            <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
+          </div>
+          <div>
+            <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+          </div>
+          </div>
+        </div>
+      </div>`
     ].join(''),
     ready: async function() {
       let fileList = this;
@@ -78,10 +100,10 @@ Fliplet.Widget.instance({
             );
           }
 
-          if (!isArray(entry.data[columnName]) || modeInteract) {
+          if (!isArray(entry.data[columnName])) {
             $(document)
               .find('[data-helper="file-image-list"]')
-              .html('<p>ATTACHMENTS</p></hr>');
+              .html('<p class="style-title">ATTACHMENTS</p>');
 
             return;
           }
