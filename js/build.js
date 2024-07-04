@@ -7,30 +7,10 @@ Fliplet.Widget.instance({
     dependencies: [],
     template: [
       '<div data-view="content" class="configured"></div>',
-      '<div data-view="not-configured" class="not-configured"></div>',
-      `<div data-view="configured-interact" class="configured-interact">
-      <div class="file-container">
-        <div class="file-container-item">
-          <div>
-            <p>Title</p>
-            <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
-          </div>
-          <div>
-            <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
-          </div>
-          </div>
-        </div>
-        <div class="file-container-item">
-          <div>
-            <p>Title</p>
-            <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
-          </div>
-          <div>
-            <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
-          </div>
-          </div>
-        </div>
-      </div>`
+      `<div data-view="not-configured" class="not-configured">
+        <p>Configure File & Image list component</p>
+      </div>`,
+      '<div data-view="configured-interact" class="configured-interact"></div>'
     ].join(''),
     ready: async function() {
       let fileList = this;
@@ -42,6 +22,35 @@ Fliplet.Widget.instance({
         $('.configured').toggle(mode === 'configured');
         $('.not-configured').toggle(mode === 'not-configured');
         $('.configured-interact').toggle(mode === 'configured-interact');
+
+        switch (mode) {
+          case 'configured-interact':
+            $('.configured-interact').html(`<div class="file-container">
+              <div class="file-container-item">
+                <div>
+                  <p>Title</p>
+                  <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
+                </div>
+                <div>
+                  <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                </div>
+                </div>
+              </div>
+              <div class="file-container-item">
+                <div>
+                  <p>Title</p>
+                  <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
+                </div>
+                <div>
+                  <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                </div>
+                </div>
+              </div>`);
+            break;
+
+          default:
+            break;
+        }
       }
 
       return Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
