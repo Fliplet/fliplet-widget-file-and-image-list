@@ -58,10 +58,10 @@ Fliplet.Widget.instance({
             );
           }
 
-          if (!isArray(entry.data[columnName])) {
+          if (!isArray(entry.data[columnName]) || modeInteract) {
             $(document)
               .find('[data-helper="file-image-list"]')
-              .html(`<p>There are no ${type}s</p>`);
+              .html('<p>ATTACHMENTS</p></hr>');
 
             return;
           }
@@ -132,6 +132,10 @@ Fliplet.Widget.instance({
                               <img src="${el.url}" />
                             </div>`;
               });
+
+              $(document)
+                .find('[data-helper="file-image-list"]')
+                .html('<p>ATTACHMENTS</p></hr>');
 
               $(document).find('[data-helper="file-image-list"]').append(`
                     <div class="image-container">
