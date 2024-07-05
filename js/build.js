@@ -55,7 +55,8 @@ Fliplet.Widget.instance({
                 </div>
               </div>`);
             } else if (type === 'Image') {
-              $('.configured-interact').html(`<div class="image-container">
+              $('.configured-interact').html(`<p class="style-title">ATTACHMENTS</p>
+                    <div class="image-container">
                       <div class="image-item-container">
                         <img src="${Fliplet.Widget.getAsset(fileListInstanceId, 'img/placeholder.png')}" />
                       </div>
