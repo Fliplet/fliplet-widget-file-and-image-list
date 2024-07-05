@@ -17,44 +17,61 @@ Fliplet.Widget.instance({
       const entry = fileList?.parent?.entry || {};
       const fileListInstanceId = fileList.id;
       const modeInteract = Fliplet.Env.get('interact');
+      const columnName = fileList.fields.columnName;
+      const type = fileList.fields.type;
 
       function showContent(mode) {
         $('.configured').toggle(mode === 'configured');
         $('.not-configured').toggle(mode === 'not-configured');
         $('.configured-interact').toggle(mode === 'configured-interact');
 
-        // switch (mode) {
-        //   case 'configured-interact':
-        //     $('.configured-interact').html(`<div class="file-container">
-        //       <p class="style-title">ATTACHMENTS</p>
-        //       <div class="file-container-item">
-        //         <div>
-        //           <p>Title</p>
-        //           <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
-        //         </div>
-        //         <div>
-        //           <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
-        //         </div>
-        //         </div>
-        //       </div>
-        //       <div class="file-container-item">
-        //         <div>
-        //           <p>Title</p>
-        //           <p>Uploaded: ${moment(new Date()).format('MMM D, YYYY')} - 12KB</p>
-        //         </div>
-        //         <div>
-        //           <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
-        //         </div>
-        //         </div>
-        //       </div>`);
-        //     break;
+        switch (mode) {
+          case 'configured-interact':
+            if (type === 'File') {
+              $('.configured-interact').html(`<div class="file-container">
+              <p class="style-title">ATTACHMENTS</p>
+              <div class="file-container-item">
+                <div>
+                  <p>Title</p>
+                  <p>Uploaded: ${moment(new Date()).format(
+    'MMM D, YYYY'
+  )} - 12KB</p>
+                </div>
+                <div>
+                  <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                </div>
+                </div>
+              </div>
+              <div class="file-container-item">
+                <div>
+                  <p>Title</p>
+                  <p>Uploaded: ${moment(new Date()).format(
+    'MMM D, YYYY'
+  )} - 12KB</p>
+                </div>
+                <div>
+                  <i class="fa fa-2x fa-angle-right" aria-hidden="true"></i>
+                </div>
+                </div>
+              </div>`);
+            } else if (type === 'Image') {
+              $('.configured-interact').html(`<div class="image-container">
+                      <div class="image-item-container">
+                        <img src="${Fliplet.Widget.getAsset(fileListInstanceId, 'img/placeholder.png')}" />
+                      </div>
+                    <div>`);
+            }
 
-        //   default:
-        //     break;
-        // }
+            break;
+
+          default:
+            break;
+        }
       }
 
-      return Fliplet.Widget.findParents({ instanceId: fileListInstanceId }).then(widgets => {
+      return Fliplet.Widget.findParents({
+        instanceId: fileListInstanceId
+      }).then((widgets) => {
         let dynamicContainer = null;
         let recordContainer = null;
         let listRepeater = null;
@@ -71,8 +88,8 @@ Fliplet.Widget.instance({
 
         if (
           !dynamicContainer
-            || !dynamicContainer.dataSourceId
-            || (!recordContainer && !listRepeater)
+          || !dynamicContainer.dataSourceId
+          || (!recordContainer && !listRepeater)
         ) {
           showContent('not-configured');
 
@@ -83,9 +100,6 @@ Fliplet.Widget.instance({
         const dataSourceEntryId = entry.id;
 
         const populateFileList = () => {
-          let columnName = fileList.fields.columnName;
-          let type = fileList.fields.type;
-
           if (!navigator.onLine) {
             return Fliplet.UI.Toast('Please connect device to the internet');
           } else if (!dataSourceEntryId && !modeInteract) {
@@ -126,7 +140,6 @@ Fliplet.Widget.instance({
             .find('[data-helper="file-image-list"]')
             .html('<p class="style-title">ATTACHMENTS</p>');
 
-
           showContent('configured');
 
           let fileIDs = entry.data[columnName].map(function(file) {
@@ -139,35 +152,32 @@ Fliplet.Widget.instance({
           Fliplet.Media.Files.getAll({
             files: fileIDs,
             fields: ['name', 'url', 'metadata', 'createdAt']
-          }).then(files => {
+          }).then((files) => {
             let filesInfo = files
               .map(function(file) {
-                const extension = file.name
-                  .split('.')
-                  .pop()
-                  .toLowerCase();
-                let type = '';
+                const extension = file.name.split('.').pop().toLowerCase();
+                let assetType = '';
 
                 switch (extension) {
                   case 'jpg':
                   case 'jpeg':
                   case 'png':
                   case 'gif':
-                    type = 'image';
+                    assetType = 'image';
                     break;
                   case 'mp4':
                   case 'avi':
                   case 'mkv':
                   case 'mov':
-                    type = 'video';
+                    assetType = 'video';
                     break;
                   default:
-                    type = 'file';
+                    assetType = 'file';
                     break;
                 }
 
                 return {
-                  type,
+                  assetType,
                   name: file.name,
                   size: file.metadata.size,
                   uploaded: file.createdAt,
@@ -198,7 +208,7 @@ Fliplet.Widget.instance({
 
               $(document)
                 .find('[data-helper="file-image-list"]')
-                .html('<p>ATTACHMENTS</p></hr>');
+                .html('<p class="style-title">ATTACHMENTS</p>');
 
               $(document).find('[data-helper="file-image-list"]').append(`
                     <div class="image-container">
@@ -233,18 +243,14 @@ Fliplet.Widget.instance({
                     </div>`);
               });
 
-              str += `<div class="file-container">${fileItems.join(
-                ''
-              )}</div>`;
+              str += `<div class="file-container">${fileItems.join('')}</div>`;
               $(document).find('[data-helper="file-image-list"]').append(str);
 
               $(document)
                 .find('.file-container-item')
                 .off('click')
                 .on('click', function() {
-                  let link = decodeURIComponent(
-                    $(this).attr('data-link')
-                  );
+                  let link = decodeURIComponent($(this).attr('data-link'));
 
                   window.open(Fliplet.Media.authenticate(link), '_blank');
                 });
