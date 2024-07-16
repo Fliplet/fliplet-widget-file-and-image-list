@@ -130,6 +130,11 @@ Fliplet.Widget.instance({
           }
 
           if (!isArray(entry.data[columnName])) {
+            showContent('hide');
+            $(document)
+              .find('[data-helper="file-image-list"]')
+              .html('<p class="style-title">ATTACHMENTS</p>');
+
             return;
           }
 
