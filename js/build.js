@@ -130,7 +130,10 @@ Fliplet.Widget.instance({
           }
 
           if (!isArray(entry.data[columnName])) {
-            showContent('configured-interact');
+            showContent('configured');
+            $(document)
+              .find('[data-helper="file-image-list"]').find('.configured')
+              .html('<p class="style-title">ATTACHMENTS</p>');
 
             return;
           }
