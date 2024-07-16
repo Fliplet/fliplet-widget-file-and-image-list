@@ -133,6 +133,7 @@ Fliplet.Widget.instance({
             $(document)
               .find('[data-helper="file-image-list"]')
               .html('<p class="style-title">ATTACHMENTS</p>');
+            showContent('configured-interact');
 
             return;
           }
