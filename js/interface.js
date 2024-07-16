@@ -14,7 +14,7 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
         {
           name: 'columnName',
           type: 'dropdown',
-          label: 'Pick file column',
+          label: 'Pick File or Image column',
           options: dataSourceColumns,
           default: '',
           ready: function() {
