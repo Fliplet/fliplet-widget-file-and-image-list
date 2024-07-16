@@ -131,8 +131,7 @@ Fliplet.Widget.instance({
 
           if (!isArray(entry.data[columnName])) {
             showContent('configured');
-            $(document)
-              .find('[data-helper="file-image-list"]').find('.configured')
+            $('.configured.view-is-empty')
               .html('<p class="style-title">ATTACHMENTS</p>');
 
             return;
