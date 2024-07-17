@@ -25,6 +25,14 @@ Fliplet.Widget.instance({
         $('.not-configured').toggle(mode === 'not-configured');
         $('.configured-interact').toggle(mode === 'configured-interact');
 
+        if (mode === 'configured-interact') {
+          $('.configured, .not-configured').remove();
+        } else if (mode === 'configured') {
+          $('.configured-interact, .not-configured').remove();
+        } else if (mode === 'not-configured') {
+          $('.configured, .configured-interact').remove();
+        }
+
         switch (mode) {
           case 'configured-interact':
             if (type === 'File') {
