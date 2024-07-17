@@ -13,7 +13,7 @@ Fliplet.Widget.instance({
       '<div data-view="configured-interact" class="configured-interact"><p class="style-title">ATTACHMENTS</p></div>'
     ].join(''),
     ready: async function() {
-      let fileList = this;
+      const fileList = this;
       const entry = fileList?.parent?.entry || {};
       const fileListInstanceId = fileList.id;
       const modeInteract = Fliplet.Env.get('interact');
@@ -211,7 +211,7 @@ Fliplet.Widget.instance({
                 .find('[data-helper="file-image-list"]')
                 .html('<p class="style-title">ATTACHMENTS</p>');
 
-              $(document).find('[data-helper="file-image-list"]').append(`
+              $(fileList.$el).find('[data-helper="file-image-list"]').append(`
                     <div class="image-container">
                       ${images.join('')}
                     <div>
@@ -245,7 +245,7 @@ Fliplet.Widget.instance({
               });
 
               str += `<div class="file-container">${fileItems.join('')}</div>`;
-              $(document).find('[data-helper="file-image-list"]').append(str);
+              $(fileList.$el).find('[data-helper="file-image-list"]').append(str);
 
               $(document)
                 .find('.file-container-item')
