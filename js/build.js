@@ -78,6 +78,11 @@ Fliplet.Widget.instance({
         }
       }
 
+      function errorMessageStructureNotValid($element, message) {
+        $element.addClass('component-error-before');
+        Fliplet.UI.Toast(message);
+      }
+
       return Fliplet.Widget.findParents({
         instanceId: fileListInstanceId
       }).then((widgets) => {
@@ -102,7 +107,11 @@ Fliplet.Widget.instance({
         ) {
           showContent('not-configured');
 
-          return;
+          if (!dynamicContainer || !dynamicContainer.dataSourceId) {
+            return errorMessageStructureNotValid($(fileList.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
+          }
+
+          return errorMessageStructureNotValid($(fileList.$el), 'This component needs to be placed inside a Record container or List Repeater component');
         }
 
         const dataSourceId = dynamicContainer.dataSourceId;
