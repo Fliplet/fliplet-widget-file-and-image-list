@@ -8,11 +8,12 @@ fl-helper[name="file-image-list"] .style-title {
 }
 
 fl-helper[name="file-image-list"] .not-configured {
-  border: 5px solid #D4D4D4!important;
+  border: 1px dotted #D4D4D4!important;
   color: #6A6868!important;
   font-family: "Open Sans", sans-serif;
   font-size: 12px;
   padding: 15px;
+  text-align: center;
   /* border: 1px solid orange; */
 }
 
