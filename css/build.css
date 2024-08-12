@@ -14,7 +14,6 @@ fl-helper[name="file-image-list"] .not-configured {
   font-size: 12px;
   padding: 15px;
   text-align: center;
-  /* border: 1px solid orange; */
 }
 
 fl-helper[name="file-image-list"] .file-container-item {
@@ -70,21 +69,4 @@ fl-helper[name="file-image-list"] .image-container {
 
 fl-helper[name="file-image-list"] .image-item-container {
   flex: 0 0 50%;
-}
-
-.component-error-before::before {
-  content: 'Incorrect component placement' !important;
-}
-
-.component-error-before:before {
-  border-top-right-radius: 10px !important;
-  position: relative !important;
-  padding: 5px;
-  font-size: 12px;
-  color: white;
-  background: red !important;
-  top: 0 !important;
-  left: 0;
-  height: 30px;
-  z-index: 5;
 }
