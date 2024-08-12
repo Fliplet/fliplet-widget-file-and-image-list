@@ -129,13 +129,13 @@ Fliplet.Widget.instance({
             return Fliplet.UI.Toast(
               'Please select Data Source from the File list component configuration'
             );
-          } else if (!columnName) {
+          } else if (!columnName && modeInteract) {
             showContent('not-configured');
 
             return Fliplet.UI.Toast(
               'Please select Column Name from File list component configuration'
             );
-          } else if (!type) {
+          } else if (!type && modeInteract) {
             showContent('not-configured');
 
             return Fliplet.UI.Toast(
