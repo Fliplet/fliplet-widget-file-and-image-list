@@ -109,10 +109,10 @@ Fliplet.Widget.instance({
           showContent('not-configured');
 
           if (!dynamicContainer || !dynamicContainer.dataSourceId) {
-            return errorMessageStructureNotValid($(fileList.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
+            return errorMessageStructureNotValid($(fileList.$el), 'This component needs to be placed inside a Data container and select a data source');
           }
 
-          return errorMessageStructureNotValid($(fileList.$el), 'This component needs to be placed inside a Record container or List Repeater component');
+          return errorMessageStructureNotValid($(fileList.$el), 'This component needs to be placed inside a Single record container or Data list component');
         }
 
         const dataSourceId = dynamicContainer.dataSourceId;
