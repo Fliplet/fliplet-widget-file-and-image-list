@@ -49,7 +49,22 @@ Fliplet.Widget.instance({
         findParentDataWidget('ListRepeater', 'com.fliplet.list-repeater')
       ]);
 
-      const ENTRY = recordContainerInstance?.entry || listRepeaterInstance?.entry || {};
+      let ENTRY = null;
+
+      if (recordContainerInstance) {
+        ENTRY = recordContainerInstance.entry;
+      } else if (listRepeaterInstance) {
+        const closestListRepeaterRow = fileList.parents().find(parent => parent.element.nodeName.toLowerCase() === 'fl-list-repeater-row');
+        if (closestListRepeaterRow) {
+          ENTRY = closestListRepeaterRow.entry;
+        }
+      }
+
+      if (!ENTRY) {
+        console.error('No entry found');
+        return;
+      }
+
       const entry = ENTRY;
 
       function showContent(mode) {
