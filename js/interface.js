@@ -1,7 +1,22 @@
 Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then(function(widgets) {
   const dynamicContainer = widgets[0];
 
-  return Fliplet.DataSources.getById(dynamicContainer && dynamicContainer.dataSourceId, {
+  if (widgets.length === 0 || !dynamicContainer.dataSourceId) {
+    Fliplet.Widget.generateInterface({
+      title: 'Configure data files',
+      fields: [
+        {
+          type: 'html',
+          html: '<p style="color: #A5A5A5; font-size: 12px; font-weight: 400;">This component needs to be placed inside a Data container with selected Data source</p>'
+        }
+      ]
+    });
+
+    return Fliplet.UI.Toast('This component needs to be placed inside a Data container with selected Data source');
+  }
+
+
+  return Fliplet.DataSources.getById(dynamicContainer.dataSourceId, {
     attributes: ['columns']
   }).then((dataSource) => {
     return _.orderBy(dataSource.columns, column => column.toLowerCase());
