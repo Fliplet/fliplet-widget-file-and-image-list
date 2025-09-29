@@ -155,7 +155,7 @@ Fliplet.Widget.instance({
             return;
           }
 
-          $(document)
+          $(fileList.$el)
             .find('[data-helper="file-image-list"]')
             .html('<p class="style-title">ATTACHMENTS</p>');
 
@@ -225,7 +225,7 @@ Fliplet.Widget.instance({
                             </div>`;
               });
 
-              $(document)
+              $(fileList.$el)
                 .find('[data-helper="file-image-list"]')
                 .html('<p class="style-title">ATTACHMENTS</p>');
 
