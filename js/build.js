@@ -8,7 +8,7 @@ Fliplet.Widget.instance({
     template: [
       '<div data-view="content" class="configured"></div>',
       `<div data-view="not-configured" class="not-configured">
-        <p>Configure File & Image list component</p>
+        <p>Configure Data files component</p>
       </div>`,
       '<div data-view="configured-interact" class="configured-interact"><p class="style-title">ATTACHMENTS</p></div>'
     ].join(''),
@@ -219,7 +219,7 @@ Fliplet.Widget.instance({
                 }
               };
               let images = data.images.map((el, index) => {
-                return `<div class="image-item-container" 
+                return `<div class="image-item-container"
                               data-index="${index}">
                               <img src="${el.url}" />
                             </div>`;
@@ -315,7 +315,7 @@ Fliplet.Widget.instance({
       {
         name: 'content',
         displayName: 'File list content',
-        placeholder: '<p>Configure File & Image list component</p>'
+        placeholder: '<p>Configure Data files component</p>'
       }
     ]
   }
