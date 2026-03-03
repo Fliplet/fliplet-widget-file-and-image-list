@@ -18,6 +18,7 @@
   "interface": {
     "dependencies": [
       "fliplet-core",
+      "fliplet-utils",
       "fliplet-studio-ui",
       "fliplet-datasources"
     ],

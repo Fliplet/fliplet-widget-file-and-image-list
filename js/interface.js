@@ -19,7 +19,7 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
   return Fliplet.DataSources.getById(dynamicContainer.dataSourceId, {
     attributes: ['columns']
   }).then((dataSource) => {
-    return _.orderBy(dataSource.columns, column => column.toLowerCase());
+    return Fliplet.Utils.orderBy(dataSource.columns, column => column.toLowerCase());
   }, () => {
     return [];
   }).then((dataSourceColumns = []) => {
